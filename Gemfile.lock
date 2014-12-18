@@ -146,6 +146,9 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    slim (1.0.1)
+      temple (~> 0.3.0)
+      tilt (~> 1.2)
     slop (3.6.0)
     spring (1.2.0)
     sprockets (2.12.3)
@@ -157,6 +160,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
+    temple (0.3.5)
     thin (1.6.3)
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0)
@@ -196,6 +200,7 @@ DEPENDENCIES
   rails (= 4.2.0.rc3)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  slim
   spring
   thin
   turbolinks
