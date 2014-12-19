@@ -27,6 +27,7 @@ gem 'nokogiri'
 gem 'feedjira'
 gem 'feedbag'
 gem 'slim'
+gem 'clearance'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
