@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141219115921) do
+ActiveRecord::Schema.define(version: 20141219153123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,20 @@ ActiveRecord::Schema.define(version: 20141219115921) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
+
+  create_table "notes", force: true do |t|
+    t.integer  "entry_id"
+    t.integer  "user_id"
+    t.text     "abstract"
+    t.text     "comment"
+    t.string   "position"
+    t.integer  "color"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "notes", ["entry_id"], name: "index_notes_on_entry_id", using: :btree
+  add_index "notes", ["user_id"], name: "index_notes_on_user_id", using: :btree
 
   create_table "rss_sources", force: true do |t|
     t.string   "url"
@@ -47,4 +61,6 @@ ActiveRecord::Schema.define(version: 20141219115921) do
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
   add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
 
+  add_foreign_key "notes", "entries"
+  add_foreign_key "notes", "users"
 end
