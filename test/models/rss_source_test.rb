@@ -47,4 +47,13 @@ class RssSourceTest < ActiveSupport::TestCase
 
     assert_nil invalid_source.send(:get_rss)
   end
+
+  test "fetch entries after save" do 
+    Entry.delete_all
+    source = rss_sources(:xiongbo) 
+    new_source = RssSource.new(url: source.url)
+    new_source.save 
+
+    assert_not_equal 0, Entry.count
+  end
 end
