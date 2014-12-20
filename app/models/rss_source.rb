@@ -11,6 +11,8 @@
 
 class RssSource < ActiveRecord::Base
   has_many :entries
+  has_many :source_mappings
+  has_many :users, through: :source_mappings
 
   validates :url, presence: true
   validate :url_should_valid 

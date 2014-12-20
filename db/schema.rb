@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141219115921) do
+ActiveRecord::Schema.define(version: 20141220021954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,15 @@ ActiveRecord::Schema.define(version: 20141219115921) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "source_mappings", id: false, force: true do |t|
+    t.integer "user_id"
+    t.integer "rss_source_id"
+    t.boolean "is_valid",      default: true
+  end
+
+  add_index "source_mappings", ["rss_source_id"], name: "index_source_mappings_on_rss_source_id", using: :btree
+  add_index "source_mappings", ["user_id"], name: "index_source_mappings_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.datetime "created_at",                     null: false
