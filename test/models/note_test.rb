@@ -18,36 +18,14 @@ require 'test_helper'
 class NoteTest < ActiveSupport::TestCase
   fixtures :notes
 
-  test "entry_id presence" do
-    invalid_note = notes(:one)
-    invalid_note.entry_id = nil
-    invalid_note.save
+  %w(entry_id user_id abstract position).each do |item|
+    test "#{item} presence" do
+      invalid_note = notes(:one)
+      invalid_note.send("#{item}=", nil)
+      invalid_note.save
 
-    assert invalid_note.errors.keys.include?(:entry_id)
-  end
-
-  test "user_id presence" do
-    invalid_note = notes(:one)
-    invalid_note.user_id = nil
-    invalid_note.save
-
-    assert invalid_note.errors.keys.include?(:user_id)
-  end
-
-  test "abstract presence" do
-    invalid_note = notes(:one)
-    invalid_note.abstract = nil
-    invalid_note.save
-
-    assert invalid_note.errors.keys.include?(:abstract)
-  end
-
-  test "position presence" do
-    invalid_note = notes(:one)
-    invalid_note.position = nil
-    invalid_note.save
-
-    assert invalid_note.errors.keys.include?(:position)
+      assert invalid_note.errors.keys.include?(item.to_sym)
+    end
   end
 
   test "default color is yellow" do
