@@ -1,0 +1,32 @@
+# == Schema Information
+#
+# Table name: notes
+#
+#  id         :integer          not null, primary key
+#  entry_id   :integer
+#  user_id    :integer
+#  abstract   :text
+#  comment    :text
+#  position   :string
+#  color      :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  entry_id: 1
+  user_id: 1
+  abstract: MyText
+  comment: MyText
+  position: MyString
+  color: 1
+
+two:
+  entry_id: 1
+  user_id: 1
+  abstract: MyText
+  comment: MyText
+  position: MyString
+  color: 1
