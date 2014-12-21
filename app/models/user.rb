@@ -15,5 +15,7 @@ class User < ActiveRecord::Base
   include Clearance::User
 
   has_many :source_mappings
+  has_many :entry_mappings
   has_many :rss_sources, through: :source_mappings
+  has_many :entries, through: :entry_mappings
 end

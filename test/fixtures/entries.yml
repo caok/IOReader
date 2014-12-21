@@ -17,17 +17,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  summary: MyText
+  title: title
+  summary: summary
   published: 2014-12-18 22:24:38
-  url: MyString
-  entry_id: MyString
-  categories: MyString
-
-two:
-  title: MyString
-  summary: MyText
-  published: 2014-12-18 22:24:38
-  url: MyString
-  entry_id: MyString
-  categories: MyString
+  url: http://xiongbo.me
+  entry_id: http://xiongbo.me/posts/1
+  categories: 

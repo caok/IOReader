@@ -17,5 +17,17 @@
 require 'test_helper'
 
 class EntryTest < ActiveSupport::TestCase
-  fixtures :entries, :rss_sources 
+  fixtures :entries, :rss_sources, :users
+
+  def setup
+    @user = users(:xiongbo)
+    @entry = entries(:one)
+    @user_attributes = gen_attributes(@user)
+  end
+
+  test "user relationship" do 
+    assert_difference '@entry.users.count', 1 do
+      @entry.users.create(@user_attributes.merge!(email: "test@gmail.com")) 
+    end
+  end
 end
