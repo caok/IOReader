@@ -74,7 +74,8 @@ class RssSourceTest < ActiveSupport::TestCase
 
   test "belongs to user" do 
     assert_difference '@source.users.count', 1 do 
-      @source.update(user: @user)
+      @source.users << @user
+      @source.save
     end
   end
 end
