@@ -14,6 +14,7 @@
 #  updated_at    :datetime         not null
 #
 
-class Entry < ActiveRecord::Base
-
+class Entry < ActiveRecord::Base 
+  has_many :entry_mappings
+  has_many :users, through: :entry_mappings
 end

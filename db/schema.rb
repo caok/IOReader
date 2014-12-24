@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141219153123) do
+ActiveRecord::Schema.define(version: 20141220023550) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "entries", force: true do |t|
+  create_table "entries", force: :cascade do |t|
     t.string   "title"
     t.text     "summary"
     t.datetime "published"
@@ -28,7 +28,17 @@ ActiveRecord::Schema.define(version: 20141219153123) do
     t.datetime "updated_at",    null: false
   end
 
-  create_table "notes", force: true do |t|
+  create_table "entry_mappings", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "entry_id"
+    t.boolean "is_valid",   default: true
+    t.boolean "has_stared"
+  end
+
+  add_index "entry_mappings", ["entry_id"], name: "index_entry_mappings_on_entry_id", using: :btree
+  add_index "entry_mappings", ["user_id"], name: "index_entry_mappings_on_user_id", using: :btree
+
+  create_table "notes", force: :cascade do |t|
     t.integer  "entry_id"
     t.integer  "user_id"
     t.text     "abstract"
@@ -42,14 +52,23 @@ ActiveRecord::Schema.define(version: 20141219153123) do
   add_index "notes", ["entry_id"], name: "index_notes_on_entry_id", using: :btree
   add_index "notes", ["user_id"], name: "index_notes_on_user_id", using: :btree
 
-  create_table "rss_sources", force: true do |t|
+  create_table "rss_sources", force: :cascade do |t|
     t.string   "url"
     t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: true do |t|
+  create_table "source_mappings", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "rss_source_id"
+    t.boolean "is_valid",      default: true
+  end
+
+  add_index "source_mappings", ["rss_source_id"], name: "index_source_mappings_on_rss_source_id", using: :btree
+  add_index "source_mappings", ["user_id"], name: "index_source_mappings_on_user_id", using: :btree
+
+  create_table "users", force: :cascade do |t|
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.string   "email",                          null: false

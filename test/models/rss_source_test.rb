@@ -12,7 +12,13 @@
 require 'test_helper'
 
 class RssSourceTest < ActiveSupport::TestCase 
-  fixtures :rss_sources
+  fixtures :rss_sources, :users
+
+  def setup 
+    @user = users(:xiongbo)
+    @source = rss_sources(:xiongbo) 
+    @source_attributes = gen_attributes(@source)
+  end
 
   test "source presence" do 
     source = RssSource.new
@@ -55,5 +61,20 @@ class RssSourceTest < ActiveSupport::TestCase
     new_source.save 
 
     assert_not_equal 0, Entry.count
+  end
+
+  test "has correct entries" do
+    Entry.delete_all
+    source = rss_sources(:xiongbo) 
+    new_source = RssSource.new(url: source.url)
+    new_source.save
+
+    assert_equal new_source.entries, Entry.all
+  end
+
+  test "belongs to user" do 
+    assert_difference '@source.users.count', 1 do 
+      @source.update(user: @user)
+    end
   end
 end
